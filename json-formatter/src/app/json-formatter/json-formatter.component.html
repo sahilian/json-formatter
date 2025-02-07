@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>JSON Formatter</h1>
+    <mat-form-field appearance="fill" class="full-width">
+      <textarea matInput [(ngModel)]="inputJson" placeholder="Enter JSON here..." rows="10"></textarea>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="formatJson()">Format JSON</button>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <pre *ngIf="formattedJson" class="formatted-json">{{ formattedJson }}</pre>
+  </div>
