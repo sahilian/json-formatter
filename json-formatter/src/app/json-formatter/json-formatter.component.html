@@ -1,14 +1,64 @@
+<!-- json-formatter.component.html -->
 <div class="container">
-    <h1>JSON Formatter</h1>
-    <mat-form-field appearance="fill" class="full-width">
-      <textarea matInput [(ngModel)]="inputJson" placeholder="Enter JSON here..." rows="10"></textarea>
-    </mat-form-field>
-  
+  <h1>JSON Formatter</h1>
+  <mat-form-field appearance="fill" class="full-width">
+    <textarea matInput [(ngModel)]="inputJson" placeholder="Enter JSON here..." rows="10"></textarea>
+  </mat-form-field>
+
+  <div class="button-group">
     <button mat-raised-button color="primary" (click)="formatJson()">Format JSON</button>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-  
-    <pre *ngIf="formattedJson" class="formatted-json">{{ formattedJson }}</pre>
+    <button mat-raised-button color="accent" (click)="toggleCollapsible()">
+      {{ isCollapsible ? 'Disable Collapse' : 'Enable Collapse' }}
+    </button>
   </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Formatted JSON Output -->
+  <div *ngIf="formattedJson && !isCollapsible" class="formatted-json">
+    <pre>{{ formattedJson }}</pre>
+  </div>
+
+  <!-- Collapsible JSON Output -->
+  <div *ngIf="isCollapsible && parsedData.length" class="json-output">
+    <ng-container *ngTemplateOutlet="jsonNode; context: { nodes: parsedData }"></ng-container>
+  </div>
+
+  <!-- Recursive template for JSON nodes -->
+  <ng-template #jsonNode let-nodes="nodes">
+    <div *ngFor="let node of nodes" class="json-node">
+      <!-- Object or Array -->
+      <div *ngIf="node.type === 'object' || node.type === 'array'" class="expandable">
+        <span class="toggle" (click)="toggleCollapse(node)">
+          <mat-icon>{{ node.collapsed ? 'chevron_right' : 'expand_more' }}</mat-icon>
+        </span>
+        <span class="key">{{ node.key }}: </span>
+        <span class="bracket">{{ node.type === 'object' ? '{' : '[' }}</span>
+        <span *ngIf="node.collapsed" class="collapsed">
+          {{ node.type === 'object' ? '... }' : '... ]' }}
+        </span>
+      </div>
+
+      <!-- Children (when not collapsed) -->
+      <div *ngIf="!node.collapsed" class="children">
+        <ng-container *ngTemplateOutlet="jsonNode; context: { nodes: node.children }"></ng-container>
+      </div>
+
+      <!-- Closing Bracket -->
+      <div *ngIf="!node.collapsed && (node.type === 'object' || node.type === 'array')" class="bracket">
+        {{ node.type === 'object' ? '}' : ']' }}
+      </div>
+
+      <!-- Primitive Value -->
+      <div *ngIf="node.type === 'primitive'" class="primitive">
+        <span class="key">{{ node.key }}: </span>
+        <span class="value">{{ node.value }}</span>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6388019626417695"
+     crossorigin="anonymous"></script>

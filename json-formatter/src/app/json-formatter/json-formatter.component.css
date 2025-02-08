@@ -1,21 +1,77 @@
+/* json-formatter.component.css */
 .container {
-    padding: 20px;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-  
-  .formatted-json {
-    background-color: #f5f5f5;
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 20px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.formatted-json {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.json-output {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.json-node {
+  margin-left: 20px;
+}
+
+.expandable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle {
+  display: inline-block;
+  width: 20px;
+}
+
+.key {
+  color: #881391; /* Purple for keys */
+}
+
+.value {
+  color: #1a01cc; /* Blue for values */
+}
+
+.bracket {
+  color: #333; /* Dark gray for brackets */
+}
+
+.collapsed {
+  color: #666;
+  font-style: italic;
+}
+
+.children {
+  margin-left: 15px;
+}
+
+mat-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+}

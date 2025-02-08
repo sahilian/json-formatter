@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { JsonFormatterComponent } from './json-formatter/json-formatter.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
